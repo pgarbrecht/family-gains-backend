@@ -23,6 +23,10 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'))
 
+// connect controllers for route logic
+const productController = require('./controllers/productController.js')
+app.use('/store', productController)
+
 // ROUTES
 app.get('/', (req, res) => {
     res.send('server working')

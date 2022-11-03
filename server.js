@@ -1,12 +1,9 @@
+// SERVER, DB CONFIGURATION
 // use express (restful api framework), assign app variable for it
 const express = require('express');
 const app = express();
 // import our model
 const Products = require('./models/products.js')
-
-
-
-// SERVER MIDDLEWARE
 // use dotenv to store secret info 
 require('dotenv').config()
 const PORT = process.env.PORT
@@ -17,9 +14,16 @@ mongoose.connect(mongoURI);
 mongoose.connection.once('open', () => {
    console.log('connected to mongo');
 });
+// method override let's us use REST verbs (PUT, etc) even if client doesn't support it
+const methodOverride = require('method-override');
 
+// MIDDLEWARE
+app.use(express.static('public'));
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(methodOverride('_method'))
 
-
+// ROUTES
 app.get('/', (req, res) => {
     res.send('server working')
 });

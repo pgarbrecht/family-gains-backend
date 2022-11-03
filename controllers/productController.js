@@ -1,11 +1,18 @@
-const express = require('express');
-const router = express.Router()
-const Products = require('../models/products.js')
- 
-router.get('/', async (req, res) => {
-    let products = await Products.find({});
-    res.send('store working')
- });
- 
+// const express = require('express')
+const db = require('../models')
+// const router = express.Router()
 
-module.exports = router
+const index = (req, res) => {
+    db.Products.find(
+        {}, (err, allProducts) => {
+            res.send('products index works')
+    })
+}
+
+module.exports = {
+    // home,
+    index
+    // create,
+    // update,
+    // destroy
+}

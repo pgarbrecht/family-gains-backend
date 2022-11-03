@@ -25,7 +25,7 @@ name: { type: String, required: true },
 description: { type: String, required: true },
 image: { type: String, required: true },
 price: { type: Number, required: true },
-instock: { type: Boolean, required: true, default: True }
+instock: { type: Boolean, required: true, default: true }
 });
 
 I have a stretch goal to add another model for admins, a file named admins.js in models folder with the following schema:

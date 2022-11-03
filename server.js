@@ -1,6 +1,8 @@
 //use express (restful api framework), assign app variable for it
 const express = require('express');
 const app = express();
+// import our model
+const Products = require('./models/products.js')
 
 //SERVER MIDDLEWARE
 //use dotenv to store secret info 

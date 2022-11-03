@@ -34,6 +34,32 @@ mongoose.connection.once('open', () => {
    console.log('connected to mongo');
 });
 
+//seed route
+// app.get('/seed', async (req, res) => {
+//     const newProducts = [
+//         {name: "product 1 name",
+//         description: "product 1 description",
+//         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png",
+//         price: 12,
+//         inStock: true
+//         }, 
+//         {name: "product 2 name",
+//         description: "product 2 description",
+//         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png",
+//         price: 8,
+//         inStock: true
+//         } 
+//     ]
+//     try {
+//         const seedItems = await Products.create(newProducts)
+//         res.send(seedItems)
+//     }
+//     catch (err) {
+//         res.send(err.message)
+//     }
+//     })
+
+
 // express app listens on port and confirms server is running
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

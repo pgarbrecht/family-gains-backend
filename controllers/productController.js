@@ -39,9 +39,20 @@ const update = (req, res) =>{
     )
 }
 
+//This route deletes a product in the database
+const destroy = (req, res) => {
+    db.Products.findByIdAndDelete(req.params.id, (error, deletedProduct) => {
+        if(!deletedProduct) return res.status(400).json({error: "Product not found"})
+        if(error) return res.status(400).json({error: error.message})
+        return res.status(200).json({
+            message: `Product ${deletedProduct.name} deleted successfully`
+        })
+    })
+}
+
 module.exports = {
     index,
     create,
     update,
-    // destroy
+    destroy
 }

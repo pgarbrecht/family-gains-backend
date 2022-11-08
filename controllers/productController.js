@@ -13,7 +13,7 @@ const index = (req, res) => {
     })
 }
 
-// This route creates a new product in the database
+//This route creates a new product in the database
 const create = (req, res) => {
     //issue is not getting req.body yet
     // return res.send(req.body)
@@ -25,9 +25,23 @@ const create = (req, res) => {
     )
 }
 
+//This route updates a product in the database
+const update = (req, res) =>{
+    db.Products.findByIdAndUpdate(req.params.id,
+        {
+            $set: req.body
+        },
+        {new: true},
+        (err, updatedProduct) => {
+            if(err) return res.status(400).json({error: err.message})
+            return res.status(200).json(updatedProduct) 
+        }
+    )
+}
+
 module.exports = {
     index,
     create,
-    // update,
+    update,
     // destroy
 }

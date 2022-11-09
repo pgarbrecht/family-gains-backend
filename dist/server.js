@@ -9,7 +9,7 @@ const Products = require('./models/products.js');
 // INTERNAL MODULES
 // const productController = require('./controllers/productController.js')
 // app.use('/store', productController)
-const routes = require('../routes');
+const routes = require('./routes');
 //ROUTES
 // sending the default route over to the controller
 app.use('/products', routes.products);

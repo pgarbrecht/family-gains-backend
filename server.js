@@ -1,9 +1,28 @@
 // set up server variables/external modules
 const express = require('express');
 const app = express();
-app.use(express.json());
 const methodOverride = require('method-override');
 const cors = require('cors');
+
+// environment variables
+require('dotenv').config()
+const PORT = process.env.PORT
+
+// Setup Cors middleware
+const whitelist = [`${process.env.FRONTEND_URL}`, `https://family-gains.herokuapp.com`];
+const corsOptions = {
+	origin: (origin, callback) => {
+		console.log(whitelist, "WHITELIST")
+		console.log(origin, "ORIGIN")
+		if (whitelist.indexOf(origin) !== -1 || !origin) {
+			callback(null, true);
+		} else {
+			callback(new Error('Not allowed by CORS'));
+		}
+	},
+};
+
+app.use(cors(corsOptions));
 
 // import our model
 const Products = require('./models/products.js')
@@ -18,27 +37,8 @@ const routes = require('./routes')
 app.use('/products', routes.products)
 // can add additional controllers here
 
-// environment variables
-require('dotenv').config()
-const PORT = process.env.PORT
-
-// Setup Cors middleware
-const whitelist = [`${process.env.FRONTEND_URL}`];
-const corsOptions = {
-	origin: (origin, callback) => {
-		console.log(whitelist, "WHITELIST")
-		console.log(origin, "ORIGIN")
-		if (whitelist.indexOf(origin) !== -1 || !origin) {
-			callback(null, true);
-		} else {
-			callback(new Error('Not allowed by CORS'));
-		}
-	},
-};
-
 // MIDDLEWARE
-app.use(cors(corsOptions));
-// app.use(express.json());
+app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'))
 

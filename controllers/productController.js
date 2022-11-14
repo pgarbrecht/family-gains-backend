@@ -15,8 +15,9 @@ const index = (req, res) => {
 
 //This route creates a new product in the database
 const create = (req, res) => {
-    //issue is not getting req.body yet
+    //issue earlier was not getting req.body
     // return res.send(req.body)
+    // console.log('checking for req.body', req.body)
     db.Products.create(
         req.body, (error, createdProduct) => {
             if(error) return res.status(400).json({ error: error.message });

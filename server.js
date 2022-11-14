@@ -8,24 +8,36 @@ const cors = require('cors');
 require('dotenv').config()
 const PORT = process.env.PORT
 
+// if you uncomment this and comment out cors lines 24 + 26-28 then no longer undefined for hitting backend route
+// https://stackoverflow.com/questions/61378602/cors-origin-undefined-with-simple-nodejs-server
+app.use(function (req, res, next) {
+	req.headers.origin = req.headers.origin || req.headers.host;
+	next();
+});
+
 // Setup Cors middleware
 const whitelist = [`${process.env.FRONTEND_URL}`, `https://family-gains.herokuapp.com`];
 const corsOptions = {
 	origin: (origin, callback) => {
 		console.log(whitelist, "WHITELIST")
 		console.log(origin, "ORIGIN")
-		if (whitelist.indexOf(origin) !== -1 || !origin) {
+		// if (whitelist.indexOf(origin) !== -1 || !origin) {
 			callback(null, true);
-		} else {
-			callback(new Error('Not allowed by CORS'));
-		}
-	},
+		// } else {
+		// 	callback(new Error('Not allowed by CORS'));
+		// }
+	}, credentials: true
 };
 
 app.use(cors(corsOptions));
 
 // import our model
 const Products = require('./models/products.js')
+
+// MIDDLEWARE
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(methodOverride('_method'))
 
 // INTERNAL MODULES
 // const productController = require('./controllers/productController.js')
@@ -36,11 +48,6 @@ const routes = require('./routes')
 // sending the default route over to the controller
 app.use('/products', routes.products)
 // can add additional controllers here
-
-// MIDDLEWARE
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-app.use(methodOverride('_method'))
 
 // use mongDB for database, mongoose for schema
 const mongoose = require('mongoose');

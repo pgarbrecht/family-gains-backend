@@ -16,11 +16,12 @@ app.use(function (req, res, next) {
 });
 
 // Setup Cors middleware
-const whitelist = [`${process.env.FRONTEND_URL}`, `https://family-gains.herokuapp.com`];
+const whitelist = [`${process.env.FRONTEND_URL}`, `https://family-gains.herokuapp.com`, `https://familygains.herokuapp.com`];
 const corsOptions = {
 	origin: (origin, callback) => {
 		console.log(whitelist, "WHITELIST")
 		console.log(origin, "ORIGIN")
+		// ok if can't get if/else to work, since whitelist is set above
 		// if (whitelist.indexOf(origin) !== -1 || !origin) {
 			callback(null, true);
 		// } else {

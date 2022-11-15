@@ -16,7 +16,7 @@ app.use(function (req, res, next) {
 });
 
 // Setup Cors middleware
-const whitelist = [`${process.env.FRONTEND_URL}`, `https://family-gains.herokuapp.com`, `https://familygains.herokuapp.com`];
+const whitelist = [`${process.env.FRONTEND_URL}`, `https://family-gains.herokuapp.com`];
 const corsOptions = {
 	origin: (origin, callback) => {
 		console.log(whitelist, "WHITELIST")

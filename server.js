@@ -8,12 +8,12 @@ const cors = require('cors');
 require('dotenv').config()
 const PORT = process.env.PORT
 
-// if you uncomment this and comment out cors lines 24 + 26-28 then no longer undefined for hitting backend route
+// if you uncomment this and comment out cors lines with if statement (not inside) and all else block then no longer undefined for hitting backend route, but ok to get undefined there if everything else works
 // https://stackoverflow.com/questions/61378602/cors-origin-undefined-with-simple-nodejs-server
-app.use(function (req, res, next) {
-	req.headers.origin = req.headers.origin || req.headers.host;
-	next();
-});
+// app.use(function (req, res, next) {
+// 	req.headers.origin = req.headers.origin || req.headers.host;
+// 	next();
+// });
 
 // Setup Cors middleware
 const whitelist = [`${process.env.FRONTEND_URL}`, `https://family-gains.herokuapp.com`];
@@ -22,11 +22,11 @@ const corsOptions = {
 		console.log(whitelist, "WHITELIST")
 		console.log(origin, "ORIGIN")
 		// ok if can't get if/else to work, since whitelist is set above
-		// if (whitelist.indexOf(origin) !== -1 || !origin) {
+		if (whitelist.indexOf(origin) !== -1 || !origin) {
 			callback(null, true);
-		// } else {
-		// 	callback(new Error('Not allowed by CORS'));
-		// }
+		} else {
+			callback(new Error('Not allowed by CORS'));
+		}
 	}, credentials: true
 };
 

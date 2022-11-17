@@ -7,7 +7,7 @@ const productSchema = new mongoose.Schema({
     description: { type: String, required: true }, 
     image: { type: String, required: true }, 
     price: { type: Number, required: true }, 
-    inStock: { type: Boolean, required: true, default: true } 
+    inStock: { type: String, required: true, default: 'yes' } 
 });
 
 // export our schema for use in the app

@@ -1,6 +1,6 @@
 const db = require('../models')
 
-//This route returns list of all product objects
+// This route returns list of all product objects
 const index = (req, res) => {
     db.Products.find(
         {}, (error, allProducts) => {
@@ -13,11 +13,8 @@ const index = (req, res) => {
     })
 }
 
-//This route creates a new product in the database
+// This route creates a new product in the database
 const create = (req, res) => {
-    //issue earlier was not getting req.body
-    // return res.send(req.body)
-    // console.log('checking for req.body', req.body)
     db.Products.create(
         req.body, (error, createdProduct) => {
             if(error) return res.status(400).json({ error: error.message });
@@ -26,7 +23,7 @@ const create = (req, res) => {
     )
 }
 
-//This route updates a product in the database
+// This route updates a product in the database
 const update = (req, res) =>{
     db.Products.findByIdAndUpdate(req.params.id,
         {
@@ -40,7 +37,7 @@ const update = (req, res) =>{
     )
 }
 
-//This route deletes a product in the database
+// This route deletes a product in the database
 const destroy = (req, res) => {
     db.Products.findByIdAndDelete(req.params.id, (error, deletedProduct) => {
         if(!deletedProduct) return res.status(400).json({error: "Product not found"})

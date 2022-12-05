@@ -17,7 +17,7 @@ This backend is a RESTFUL API that serves responses to the front end for the Fam
 "price": 12, <br />
 "inStock": "yes" <br />
 } <br />
-GET and DELETE requests do not require a body <br />
+GET and DELETE requests do not require a body. <br />
 
 ## API Endpoints and responses they provide
 GET / provides a list of all products <br />

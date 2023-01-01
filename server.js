@@ -8,7 +8,7 @@ const cors = require('cors');
 require('dotenv').config()
 const PORT = process.env.PORT
 
-// Set up Cors middleware
+// Set up CORS middleware
 const whitelist = [`${process.env.FRONTEND_URL}`, `http://www.familygains.com`, `https://www.familygains.com`, `www.familygains.com`, `familygains.com`, `https://family-gains.herokuapp.com`];
 const corsOptions = {
 	origin: (origin, callback) => {
